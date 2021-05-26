@@ -44,8 +44,6 @@ def info(country):
 
 def twitter_trends(Country):
     try:
-        proxies = {'http':'187.243.255.174:8080'}
-        ProxyHandler(proxies=proxies)
         trending = {}
         initial = Request('https://twitter-trends.iamrohit.in/'+ Country.lower().replace(' ','-'), headers={'User-Agent':'Chrome/5.0'})
         req = urlopen(initial).read()
