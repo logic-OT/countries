@@ -15,4 +15,4 @@ def info(request,country):
         para_2 = paras[1]
         trending = scraper.twitter_trends(country)
         context ={'country':country, 'para_1':para_1, 'para_2':para_2,'trending':trending}
-        return render(request,'country_info\info.html',context)
+        return render(request,'country_info/info.html',context)
