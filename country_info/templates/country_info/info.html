@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+    <title>{{country}}</title>
+    <style>
+    
+.container {
+  padding: 30px;
+  margin: 0 auto;
+  max-width: 760px;
+}
+  html{
+    scroll-behavior: smooth;
+  }
+    </style>
+  </head>
+  <body >
+    
+      
+      <h1 style='padding: 10px; margin-bottom: 10px;' class='display-4' id = 'top'>Welcome to {{country}}</h1>
+      <p style="padding: 20px; box-shadow: 0px 1px  10px #888888">{{para_1}}</p>
+      <br><p style="padding: 20px; box-shadow: 0px 1px  18px #888888">{{para_2}}</p>
+    
+    
+
+    <h3 id='h' style="margin-top: 30px;" class= 'text-primary h3'>Twitter {{country}}</h3>
+    <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Trending</th>
+            <th scope="col">No. of Tweets</th>
+          </tr>
+        </thead>
+        <tbody class='tbody'>
+            {% for key,value in trending.items %}
+                <tr scope='row'>
+                    <td>{{key}}</td>
+                    <td>{{value}}</td>
+                </tr>
+            {% empty %}
+                <script>
+                    document.querySelector('table').innerHTML=''
+                    document.querySelector('#h').innerHTML=''
+                </script>
+                <h4 style="color:crimson; padding-top: 20px;">No Twitter trends available </h4>
+            {% endfor %}
+
+        </tbody>
+      </table>
+
+      <footer class='bg-dark text-light'>
+        <div class="container">
+          <h4 id='warning'>Don't click the red button!!</h4>
+          <a href = '#top' style='text-align: center;' class='btn btn-md btn-danger' onclick="message()">Think twice</a>
+        </div>
+          
+      </footer>
+    <script>
+      function message(){
+        document.querySelector('.btn').innerText = 'scroll to top'
+        document.querySelector('#warning').innerText='You disobedient piece of 💩!'
+      }
+    </script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+  </body>
+</html>
+
+
+
+
+

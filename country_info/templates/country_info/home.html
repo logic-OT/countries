@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+    <title>Home</title>
+  </head>
+  <body>
+    <div>
+      <nav class="navbar navbar-dark bg-dark">
+        <form class="form-inline mr-auto">
+          
+          <input class="form-control mr-sm-2" id='search' type="search" onkeyup="send_data()" placeholder="Search" aria-label="Search">
+        </form>
+        <button class="btn btn-outline-success btn-md my-2 ml-auto" type="submit">dark-mode</button>
+      </nav>
+      
+    </div>
+    
+    
+    <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Countries</th>
+            <th scope="col">Options</th>
+          </tr>
+        </thead>
+        <tbody class='tbody'>
+         
+        </tbody>
+      </table>
+
+      
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+  </body>
+</html>
+
+
+<script>
+    var socket = new WebSocket('ws://'+window.location.host+'/realt_search/')
+
+    
+    function send_data(){
+        
+
+        var search = document.querySelector('#search').value
+        var dict = {'message':search}
+        socket.send(JSON.stringify(dict))
+
+        }
+
+    socket.onmessage = function(event){
+
+                
+    received = JSON.parse(event.data).response
+
+    document.querySelector('.tbody').innerHTML= ''
+
+    for (let i = 0; i<received.length; i++){
+        row = document.createElement('tr')
+        row.setAttribute('scope','row')
+        head = document.createElement('td')
+        head.innerText = i + 1
+        Data1 = document.createElement('td')
+        country = received[i]
+        Data1.innerText = country
+        Data2 = document.createElement('td')
+        link = document.createElement('a')
+        link.setAttribute('href','info/'+country)
+        link.innerText = 'view'
+        Data2.appendChild(link)
+        row.appendChild(head)
+        row.appendChild(Data1)
+        row.appendChild(Data2)
+        
+        document.querySelector('.tbody').appendChild(row)
+    }
+  }
+ 
+  button = document.querySelector('.btn')
+  button.onclick = function(event){
+    if(button.innerText=='dark-mode'){
+      document.querySelector('.table').classList.add('table-dark')
+      button.innerText='light-mode'
+    }
+
+    else{
+      document.querySelector('.table').classList.remove('table-dark')
+      button.innerText='dark-mode'
+    }
+  }
+</script>
