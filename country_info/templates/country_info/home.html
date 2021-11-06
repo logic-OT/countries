@@ -48,7 +48,8 @@
 
 
 <script>
-    var socket = new WebSocket('wss://'+window.location.host+'/realt_search/')
+   var ws_scheme = window.location.protocol == "https:" ? "wss" : "ws"
+   var socket = new WebSocket(ws_scheme + '://'+window.location.host+'/realt_search/')
 
     
     function send_data(){
